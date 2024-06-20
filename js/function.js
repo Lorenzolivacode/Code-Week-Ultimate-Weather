@@ -29,9 +29,137 @@ function removeCityF(arrayList, cityNameArray){
     }
 };
 
-function openCity (cityCardEl){
-    cityCardEl.style.minWidth = '100%';
-    cityCardEl.style.maxWidth = '100%';
+async function openCity (cityCardEl, city){
+    //const existingSecondaryCardContainer = cityCardEl.querySelector('.secondary-card-container');
+    const secondaryCardContainer = CE('div');
+    secondaryCardContainer.classList.add('secon-c-container', 'width100', 'shape-br40-p15', 'box-s-inset-dx');
+
+    const cityTime = QS('.city-time');
+
+    if (Number.parseInt(cityCardEl.style.maxWidth) < 100 || cityCardEl.style.maxWidth === ''){
+        //console.log(Number(Number.parseInt(cityCardEl.style.maxWidth)));
+        cityCardEl.style.minWidth = '100%';
+        cityCardEl.style.maxWidth = '100%';
+
+        const cityData = await getWeather(city);
+        //console.log(cityData);
+
+    //CREAZIONE DELL'ORA LOCALE IN LIVE
+        //const cityTimeContainer = CE('div');
+        const cityTimeLocal = CE('span');
+        cityTimeLocal.classList.add('city-time-local', 'time-style');
+
+        cityTime.style.display = 'none';
+
+        setInterval(() => {
+
+            const date1 = new Date();
+            const cityHours = (((date1.getHours())*3600)-7200+cityData.timezone)/3600;
+
+            if (cityHours >= 24){
+                cityTimeLocal.textContent = `${cityHours - 24} : ${date1.getMinutes()} : ${date1.getSeconds()}`;
+            } else {
+                cityTimeLocal.textContent = `${cityHours} : ${date1.getMinutes()} : ${date1.getSeconds()}`;
+            }
+        }, 1000);
+
+    //CLOUDS
+        const cloudsContainer = CE('div');
+        cloudsContainer.classList.add('clouds-container', 'flex-row');
+        const cloudsIcon = CE('img');
+        cloudsIcon.src = './../img/icons8-nuovoloso-30.png';
+        const cloudPercentage = CE('span');
+        cloudPercentage.textContent = `Nuvolosità: ${cityData.clouds.all}%`;
+        //console.log(cloudPercentage.textContent);
+        cloudsContainer.append(cloudPercentage, cloudsIcon);
+
+    //TEMP MAX-MIN
+        const tempMaxMinContainer = CE('div');
+        tempMaxMinContainer.classList.add('temp-mm-container', 'flex-row');
+        const tempMaxMinIcon = CE('img');
+        tempMaxMinIcon.src = './../img/icons8-temperatura-50(1).png';
+        const dataTempCont = CE('div');
+        dataTempCont.classList.add('data-temp-cont', 'flex-column');
+        const tempMax = CE('span');
+        tempMax.textContent = `Temperatura max: ${cityData.main.temp_max}°`;
+        const tempMin = CE('span');
+        tempMin.textContent = `Temperatura min: ${cityData.main.temp_min}°`;
+
+        dataTempCont.append(tempMax, tempMin);
+        tempMaxMinContainer.append(dataTempCont, tempMaxMinIcon);
+
+    //RAIN
+        const rainContainer = CE('div');
+        rainContainer.classList.add('rain-container', 'flex-row');
+        const rainIcon = CE('img');
+        rainIcon.src = './../img/icons8-rain-24.png';
+        const rainQuantity = CE('span');
+
+        if (cityData.rain) {
+            rainQuantity.textContent = `Pioggia in 1h: ${cityData.rain['1h']}mm`;
+        } else {
+            rainQuantity.textContent = `Pioggia in 1h: 0 mm`;
+        }
+
+        rainContainer.append(rainQuantity, rainIcon);
+
+    //SNOW
+        const snowContainer = CE('div');
+        snowContainer.classList.add('snow-container', 'flex-row');
+        const snowIcon = CE('img');
+        snowIcon.src = './../img/icons8-neve-50.png';
+        const snowQuantity = CE('span');
+
+        if (cityData.snow) {
+            snowQuantity.textContent = `Neve in 1h: ${cityData.snow['1h']}mm`;
+        } else {
+            snowQuantity.textContent = `Neve in 1h: 0 mm`;
+        }
+
+        snowContainer.append(snowQuantity, snowIcon);
+
+    //WIND
+        const windContainer = CE('div');
+        windContainer.classList.add('wind-container', 'flex-row');
+        const windIcon = CE('img');
+        windIcon.src = './../img/icons8-vento-50.png';
+        const windConverseCont = CE('div');
+        windConverseCont.classList.add('wind-converse-cont', 'flex-column');
+        const windMS = CE('span');
+        windMS.textContent = `Velocità vento: ${(cityData.wind.speed).toFixed(1)} m/s`;
+        const windKH = CE('span');
+        windKH.textContent = `Velocità vento: ${(cityData.wind.speed * 3.6).toFixed(1)} km/h`;
+        const windN = CE('span');
+        windN.textContent = `Velocità vento: ${(cityData.wind.speed * 1.9438).toFixed(1)} nodi`;
+
+        windConverseCont.append(windMS, windKH, windN);
+        windContainer.append(windConverseCont, windIcon);
+
+        //cityCardEl.classList.add('flex-row-around');
+
+
+        secondaryCardContainer.append(
+            cityTimeLocal,
+            cloudsContainer,
+            tempMaxMinContainer,
+            rainContainer,
+            snowContainer,
+            windContainer
+        );
+
+        cityCardEl.append(secondaryCardContainer);
+    } else {
+        cityTime.style.display = 'block';
+        console.log(cityTime.style.display);
+        
+        const secondaryCardContainer = QS('.secon-c-container');
+        //console.log(Number(Number.parseInt(cityCardEl.style.maxWidth)));
+        cityCardEl.style.minWidth = '250px';
+        cityCardEl.style.maxWidth = '20%';
+
+        secondaryCardContainer.remove();
+        //cityCardEl.classList.remove('flex-row-around');
+    }
 };
 
 function modalFavouritesGen(name, star, txt){
@@ -52,9 +180,10 @@ function modalFavouritesGen(name, star, txt){
 };
 
 export async function getCity (city) {
-    const CITY_URL = `http://api.openweathermap.org/geo/1.0/direct?q=${city}&appid=${API_KEY}`;
+    const CITY_URL = `http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=25&appid=${API_KEY}`;
     const res = await fetch(CITY_URL);
     const data = await res.json();
+    console.log(data);
 
     return data
 }
@@ -73,6 +202,7 @@ export async function getWeather (city){
     const res = await fetch(WEATHER_URL);
     const data = await res.json();
     console.log(data);
+    console.log(resCity);
     //console.log(data.main.temp);
     return data
 }
@@ -80,6 +210,7 @@ export async function getWeather (city){
 export async function renderCard (city, obj){ //obj = getWeather(city)
 //DEFINISCO GLI ELEMENTI DELLA CARD
     const cityCardEl = CE('div');
+    const mainCardContainer = CE('div');
     const countryFlag = CE('div');
     const name = CE('h2');
     const country = CE('h3');
@@ -99,7 +230,8 @@ export async function renderCard (city, obj){ //obj = getWeather(city)
     const starFavourite = CE('img');
 
 //ATTRIBUISCO LE CLASS
-    cityCardEl.classList.add('card', 'box-shadow');
+    cityCardEl.classList.add('card', 'box-shadow', 'flex-row-around');
+    mainCardContainer.classList.add('card__main-container', 'card', 'hover-scale', 'flex-column')
     countryFlag.classList.add('country-flag');
     name.classList.add('name', 'shape-br40-p15');
     country.classList.add('name', 'shape-br40-p15');
@@ -114,7 +246,7 @@ export async function renderCard (city, obj){ //obj = getWeather(city)
     humidityContainer.classList.add('flex-column');
     humidityImg.classList.add('main-temp__img');
     cityHumidity.classList.add('main-temp__humidity');
-    cityTime.classList.add('time-style');
+    cityTime.classList.add('city-time', 'time-style');
 
     starFavourite.classList.add('star-favourite', 'cursor-p', 'opacity07');
 
@@ -144,10 +276,10 @@ export async function renderCard (city, obj){ //obj = getWeather(city)
         const date1 = new Date();
         const cityHours = (((date1.getHours())*3600)-7200+timeZone)/3600;
 
-        if (cityHours >=24){
-            cityTime.textContent = `${cityHours - 24}:${date1.getMinutes()}`;
+        if (cityHours >= 24){
+            cityTime.textContent = `${cityHours - 24} : ${date1.getMinutes()}`;
         } else {
-            cityTime.textContent = `${cityHours}:${date1.getMinutes()}`;
+            cityTime.textContent = `${cityHours} : ${date1.getMinutes()}`;
         }
     }, 1000);
 
@@ -167,19 +299,19 @@ export async function renderCard (city, obj){ //obj = getWeather(city)
 
 //ASSEGNO UN COLORE IN BASE ALLA TEMPERATURE
     if (tempValue <= 5){
-        tempContainer.classList.add('weather-very-cold');
+        mainCardContainer.classList.add('weather-very-cold');
     }
     if (tempValue > 5 && tempValue <= 15){
-        tempContainer.classList.add('weather-cold');
+        mainCardContainer.classList.add('weather-cold');
     }
     if (tempValue > 15 && tempValue <= 25){
-        tempContainer.classList.add('weather-normal');
+        mainCardContainer.classList.add('weather-normal');
     }
     if (tempValue > 25 && tempValue <= 30){
-        tempContainer.classList.add('weather-hot');
+        mainCardContainer.classList.add('weather-hot');
     }
     if (tempValue > 30){
-        tempContainer.classList.add('weather-very-hot');
+        mainCardContainer.classList.add('weather-very-hot');
     }
 
 //APPENDO GLI ELEMENTI
@@ -188,14 +320,16 @@ export async function renderCard (city, obj){ //obj = getWeather(city)
     humidityContainer.append(humidityImg, cityHumidity);
     tempContainer.append(degContainer, humidityContainer);
 
-    cityCardEl.append(countryFlag, name, country, weatherContainer, tempContainer, cityTime, starFavourite);
+    mainCardContainer.append(countryFlag, name, country, weatherContainer, tempContainer, cityTime, starFavourite);
+
+    cityCardEl.append(mainCardContainer);
 
     sectionCityList.append(cityCardEl);
     //console.log(name.textContent)
 
 //ASSEGNO GLI EVENTI
-    starFavourite.onclick = () => {
-        const favouritesTag = QS('#favourites-tag');
+    starFavourite.onclick = (e) => {
+        const favouritesTag = QS('#favourites');
         console.log(favouritesTag)
 
         if (starFavourite.src.includes('gray')){
@@ -233,8 +367,15 @@ export async function renderCard (city, obj){ //obj = getWeather(city)
         }
     }
 
-    cityCardEl.addEventListener('click', () => {
-        openCity(cityCardEl);
+    mainCardContainer.addEventListener('click', (e) => {
+        const targetCalss = e.target.classList;
+        console.log(targetCalss)
+        console.log(!targetCalss.contains('star-favourite'))
+
+        if (!targetCalss.contains('star-favourite')){
+            console.log('pippo');
+            openCity(cityCardEl, city);
+        }
     });
 
     return cityCardEl

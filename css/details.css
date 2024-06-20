@@ -7,12 +7,24 @@
     /* width: 100%; */
 }
 
+.flex-row-around {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
 .flex-column {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 10px;
+}
+
+.width100 {
+    width: 100%;
+    height: 100%;
+    /* background-color: aqua; */
 }
 
 .shape-br40-p15 {
@@ -34,7 +46,11 @@
     box-shadow: 0 0 10px black;
 }
 
-.weather-very-hot {
+.box-s-inset-dx {
+    box-shadow: -5px 0px 5px inset rgba(0, 0, 0, 0.25);
+}
+
+/* .weather-very-hot {
     background-color: var(--color-fire);
 }
 .weather-hot {
@@ -48,23 +64,23 @@
 }
 .weather-very-cold {
     background-color: var(--color-ice);
-}
+} */
 
-/* .weather-very-hot {
-    box-shadow: 0 0 10px inset var(--color-fire);
+.weather-very-hot {
+    box-shadow: 0 0 30px inset var(--color-fire);
 }
 .weather-hot {
-    box-shadow: 0 0 10px inset var(--color-orange);
+    box-shadow: 0 0 30px inset var(--color-orange);
 }
 .weather-normal {
-    box-shadow: 0 0 10px inset var(--color-spring);
+    box-shadow: 0 0 40px inset var(--color-spring);
 }
 .weather-cold {
-    box-shadow: 0 0 10px inset var(--color-snow);
+    box-shadow: 0 0 45px inset var(--color-snow);
 }
 .weather-very-cold {
-    box-shadow: 0 0 10px inset var(--color-ice);
-} */
+    box-shadow: 0 0 60px inset var(--color-ice);
+}
 
 .weather__icon{
     width: 60px;
@@ -78,4 +94,5 @@
     font-size: 1.2rem;
     font-family: "Orbitron", sans-serif;
     font-weight: 500;
+    letter-spacing: 5px;
 }

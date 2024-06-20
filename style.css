@@ -12,7 +12,7 @@
 }
 
 body {
-    background-image: url(img/n_meteo.jpg);
+    background-image: url(img/Default.png);
     /* padding-left: 80px;
     padding-right: 80px; */
     background-size: cover;
@@ -41,18 +41,51 @@ body {
 }
 
 .card {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
     margin: 20px;
     min-width: 250px;
     max-width: 20%;
     border-radius: 20px;
+    padding: 10px;
+    /* padding: 20px; */
+    /* padding-top: 0; */
+    background-color: rgba(247, 242, 235, 0.9);
+}
+
+.card__main-container {
+    margin: 0;
     padding: 20px;
     padding-top: 0;
-    background-color: rgba(247, 242, 235, 0.9);
+    width: 100%;
+}
+
+.secon-c-container{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap-reverse;
+    justify-content: end;
+    align-items: end;
+    align-content: end;
+    gap: 30px;
+    padding: 20px;
+    max-height: 455px;
+    font-size: 1.1rem;
+}
+
+.secon-c-container > div > div {
+    gap: 10px;
+}
+
+.secon-c-container > div > img {
+    margin: 20px;
+    width: 30px;
+}
+
+.city-time-local {
+    position: absolute;
+    top: 80px;
+    left: 80px;
+    font-size: 2vw;
 }
 
 .country-flag {

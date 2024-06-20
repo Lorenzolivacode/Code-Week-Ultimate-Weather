@@ -8,8 +8,8 @@ const cityName = 'palermo';
 const body = QS('body');
 const hmaburger = QS('.ham-menu');
 const navbar = QS('#side-bar');
-const favouritesEl = QS('#favourites');
-const favouritesTag = QS('#favourites-tag');
+const favouritesEl = QS('#favourites-li');
+const favouritesTag = QS('#favourites');
 const timeNow = QS('.time-now');
 
 const sectionCityList = QS('.city-list');
@@ -40,8 +40,8 @@ hmaburger.addEventListener('click', () => {
 navbar.addEventListener('click', (e) => {
     const sectionListId = e.target.id;
 
-    if (e.target.tagName === "LI"){
-        console.log(e.target.id)
+    if ((e.target.tagName === "LI" || sectionListId === "favourites") && sectionListId !== "favourites-li"){
+        console.log(sectionListId)
         console.log(cityList[sectionListId])
         renderListCity(cityList[sectionListId])
     }
@@ -49,5 +49,8 @@ navbar.addEventListener('click', (e) => {
 
 setInterval(() => {
     const date1 = new Date();
-    timeNow.textContent = `${date1.getHours()}:${date1.getMinutes()}:${date1.getSeconds()}`
+    timeNow.textContent = `${date1.getHours()} : ${date1.getMinutes()} : ${date1.getSeconds()}`
 }, 1000);
+
+//await getCity('yor')
+//await renderCard('new york')
