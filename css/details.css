@@ -1,0 +1,81 @@
+.flex-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    /* border: 4px double darkblue; */
+    /* width: 100%; */
+}
+
+.flex-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.shape-br40-p15 {
+    border-radius: 40px;
+    padding: 15px;
+}
+
+.shape-br5-p5 {
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.padding-side35 {
+    padding-left: 35px;
+    padding-right: 35px;
+}
+
+.box-shadow {
+    box-shadow: 0 0 10px black;
+}
+
+.weather-very-hot {
+    background-color: var(--color-fire);
+}
+.weather-hot {
+    background-color: var(--color-orange);
+}
+.weather-normal {
+    background-color: var(--color-spring);
+}
+.weather-cold {
+    background-color: var(--color-snow);
+}
+.weather-very-cold {
+    background-color: var(--color-ice);
+}
+
+/* .weather-very-hot {
+    box-shadow: 0 0 10px inset var(--color-fire);
+}
+.weather-hot {
+    box-shadow: 0 0 10px inset var(--color-orange);
+}
+.weather-normal {
+    box-shadow: 0 0 10px inset var(--color-spring);
+}
+.weather-cold {
+    box-shadow: 0 0 10px inset var(--color-snow);
+}
+.weather-very-cold {
+    box-shadow: 0 0 10px inset var(--color-ice);
+} */
+
+.weather__icon{
+    width: 60px;
+}
+
+.weather__type {
+    text-transform: capitalize;
+}
+
+.time-style {
+    font-size: 1.2rem;
+    font-family: "Orbitron", sans-serif;
+    font-weight: 500;
+}

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <title>It's Meteo</title>
+</head>
+<body>
+    <!-- <div class="card">
+        <h2 class="name shape-br40-p15"></h2>
+        <div class="weather flex-row shape-br40-p15">
+            <img class="weather__icon" src="" alt="Weather icon">
+            <span class="weather__type"></span>
+        </div>
+        <div class="main-temp flex-row shape-br40-p15 weather-hot">
+            <span class="main-temp__temp"></span>
+            <span class="main-temp__humidity"></span>
+        </div>
+    </div> -->
+    <header class="box-shadow">
+        <div class="ham-menu shape-br5-p5 box-shadow cursor-p hover-scale">
+            <div id="ham-menu__top"></div>
+            <div id="ham-menu__center"></div>
+            <div id="ham-menu__bottom"></div>
+        </div>
+        <h1>It's <span id="me">me</span>teo</h1>
+        <span class="time-now time-style"></span>
+        <input class="shape-br5-p5" type="text" placeholder="Cerca la città">
+    </header>
+
+    <div class="container">
+        <nav id="side-bar" class="box-shadow">
+            <ul>
+                <li id="favourites" class="side-bar__title cursor-p hover-scale">
+                    <img src="img/icons8-stella-30(gray).png" alt="Icona preferiti">
+                    <span id="favourites-tag">Preferiti</span>
+                </li>
+                <li class="side-bar__title">
+                    <img src="img/icons8-mappamondo-50.png" alt="Icona capitali nel mondo">
+                    <span>Capitali</span>
+                </li>
+                <ul id="continents-capitals">
+                    <li id="europeanCapitals" class="cursor-p hover-scale">Capitali europee</li>
+                    <li id="northAmericaCapitals" class="cursor-p hover-scale">Capitali nord-americane</li>
+                    <li id="southAmericaCapitals" class="cursor-p hover-scale">Capitali sud-americane</li>
+                    <li id="asiaCapitals" class="cursor-p hover-scale">Capitali asiatiche</li>
+                    <li id="africaCapitals" class="cursor-p hover-scale">Capitali africane</li>
+                    <li id="oceaniaCapitals" class="cursor-p hover-scale">Capitali oceaniche</li>
+                </ul>
+            </ul>
+        </nav>
+
+        <section class="city-list"></section>
+    </div>
+
+    <script src="script.js" type="module"></script>
+</body>
+</html>
