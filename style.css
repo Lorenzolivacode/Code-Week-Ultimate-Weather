@@ -12,13 +12,17 @@
 }
 
 body {
-    background-image: url(img/Default.png);
+    background-image: url(img/Firefly\ un\ bel\ paesaggio\ naturale\ e\ urbano\ dal\ cielo\ limpido\ 56330.jpg);
     /* padding-left: 80px;
     padding-right: 80px; */
     background-size: cover;
     background-attachment: fixed;
-    background-position: center;
+    /* background-position: center; */
 }
+
+/* .time-now {
+    font-size: 100%;
+} */
 
 #continents-capitals{
     margin-left: 25%;
@@ -58,7 +62,7 @@ body {
     width: 100%;
 }
 
-.secon-c-container{
+.second-c-container{
     position: relative;
     display: flex;
     flex-direction: column;
@@ -68,15 +72,15 @@ body {
     align-content: end;
     gap: 30px;
     padding: 20px;
-    max-height: 455px;
+    /* max-height: 455px; */
     font-size: 1.1rem;
 }
 
-.secon-c-container > div > div {
+.second-c-container > div > div {
     gap: 10px;
 }
 
-.secon-c-container > div > img {
+.second-c-container > div > img {
     margin: 20px;
     width: 30px;
 }
@@ -99,8 +103,8 @@ body {
 }
 
 .weather__icon{
-border-radius: 50%;
-    background-color: rgba(0, 0, 0, 0.25);
+    border-radius: 50%;
+    background-color: var(--color-black-transparent25);
 }
 
 .main-temp {

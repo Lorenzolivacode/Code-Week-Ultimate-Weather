@@ -53,9 +53,9 @@ li {
     list-style-type: none;
 }
 
-#favourites-li {
-    /* list-style-image: url(../img/icons8-stella-30\(gray\).png); */
-}
+/* #favourites-li {
+    list-style-image: url(../img/icons8-stella-30\(gray\).png);
+} */
 
 .side-bar__title{
     display: flex;
@@ -67,4 +67,8 @@ li {
 
 .side-bar__title > img {
     width: 20px;
+}
+
+#search-button {
+    border: none;
 }

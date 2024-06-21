@@ -198,31 +198,29 @@ europeanCapitals: [
 ],
 
 northAmericaCapitals: [
-    {
-        city: "Washington",
-        country: "Stati Uniti",
-        flag: "linear-gradient(0deg, rgba(178,34,52,0.6) 33%, rgba(255,255,255,0.6) 40%, rgba(255,255,255,0.6) 60%, rgba(10,49,97,0.6) 66%)"
-    },
-    {
-        city: "Ottawa",
-        country: "Canada",
-        flag: "linear-gradient(90deg, rgba(255,0,0,0.6) 50%, rgba(255,255,255,0.6) 50%)"
-    },
-    {
-        city: "Città del Messico",
-        country: "Messico",
-        flag: "linear-gradient(90deg, rgba(0,104,71,0.6) 33%, rgba(255,255,255,0.6) 40%, rgba(255,255,255,0.6) 60%, rgba(206,17,38,0.6) 66%)"
-    },
-    {
-        city: "Guatemala",
-        country: "Guatemala",
-        flag: "linear-gradient(0deg, rgba(0,153,153,0.6) 33%, rgba(255,255,255,0.6) 40%, rgba(255,255,255,0.6) 60%, rgba(0,153,153,0.6) 66%)"
-    },
-    {
-        city: "Havana",
-        country: "Cuba",
-        flag: "linear-gradient(0deg, rgba(0,51,160,0.6) 33%, rgba(255,255,255,0.6) 40%, rgba(255,255,255,0.6) 60%, rgba(193,39,45,0.6) 66%)"
-    }
+    { city: "Washington", country: "Stati Uniti", flag: "linear-gradient(180deg, rgba(60,59,110,0.6) 33%, rgba(255,255,255,0.6) 34%, rgba(255,255,255,0.6) 66%, rgba(178,34,52,0.6) 67%)" },
+    { city: "Ottawa", country: "Canada", flag: "linear-gradient(180deg, rgba(255,0,0,0.6) 33%, rgba(255,255,255,0.6) 34%, rgba(255,255,255,0.6) 66%, rgba(255,0,0,0.6) 67%)" },
+    { city: "Città del Messico", country: "Messico", flag: "linear-gradient(180deg, rgba(0,104,71,0.6) 33%, rgba(255,255,255,0.6) 34%, rgba(255,255,255,0.6) 66%, rgba(206,17,38,0.6) 67%)" },
+    { city: "Belmopan", country: "Belize", flag: "linear-gradient(180deg, rgba(0,56,168,0.6) 33%, rgba(255,255,255,0.6) 34%, rgba(255,255,255,0.6) 66%, rgba(206,17,38,0.6) 67%)" },
+    { city: "Guatemala", country: "Guatemala", flag: "linear-gradient(180deg, rgba(0,151,211,0.6) 33%, rgba(255,255,255,0.6) 34%, rgba(255,255,255,0.6) 66%, rgba(0,151,211,0.6) 67%)" },
+    { city: "Tegucigalpa", country: "Honduras", flag: "linear-gradient(180deg, rgba(0,151,211,0.6) 50%, rgba(255,255,255,0.6) 50%)" },
+    { city: "San Salvador", country: "El Salvador", flag: "linear-gradient(180deg, rgba(0,56,168,0.6) 33%, rgba(255,255,255,0.6) 34%, rgba(255,255,255,0.6) 66%, rgba(0,56,168,0.6) 67%)" },
+    { city: "Managua", country: "Nicaragua", flag: "linear-gradient(180deg, rgba(0,151,211,0.6) 33%, rgba(255,255,255,0.6) 34%, rgba(255,255,255,0.6) 66%, rgba(0,151,211,0.6) 67%)" },
+    { city: "San José", country: "Costa Rica", flag: "linear-gradient(180deg, rgba(206,17,38,0.6) 33%, rgba(255,255,255,0.6) 34%, rgba(255,255,255,0.6) 66%, rgba(0,56,168,0.6) 67%)" },
+    { city: "Panama", country: "Panama", flag: "linear-gradient(180deg, rgba(255,255,255,0.6) 50%, rgba(206,17,38,0.6) 50%)" },
+    { city: "L'Avana", country: "Cuba", flag: "linear-gradient(180deg, rgba(206,17,38,0.6) 33%, rgba(255,255,255,0.6) 34%, rgba(255,255,255,0.6) 66%, rgba(0,56,168,0.6) 67%)" },
+    { city: "Kingston", country: "Giamaica", flag: "linear-gradient(180deg, rgba(0,104,71,0.6) 33%, rgba(255,255,255,0.6) 34%, rgba(255,255,255,0.6) 66%, rgba(0,0,0,0.6) 67%)" },
+    { city: "Port-au-Prince", country: "Haiti", flag: "linear-gradient(180deg, rgba(206,17,38,0.6) 50%, rgba(0,56,168,0.6) 50%)" },
+    { city: "Santo Domingo", country: "Repubblica Dominicana", flag: "linear-gradient(180deg, rgba(206,17,38,0.6) 25%, rgba(255,255,255,0.6) 26%, rgba(255,255,255,0.6) 74%, rgba(0,56,168,0.6) 75%)" },
+    { city: "Port of Spain", country: "Trinidad e Tobago", flag: "linear-gradient(180deg, rgba(206,17,38,0.6) 100%)" },
+    { city: "Nassau", country: "Bahamas", flag: "linear-gradient(180deg, rgba(0,191,255,0.6) 50%, rgba(255,255,255,0.6) 50%)" },
+    { city: "Bridgetown", country: "Barbados", flag: "linear-gradient(180deg, rgba(255,223,0,0.6) 50%, rgba(0,56,168,0.6) 50%)" },
+    { city: "Saint John's", country: "Antigua e Barbuda", flag: "linear-gradient(180deg, rgba(206,17,38,0.6) 33%, rgba(255,255,255,0.6) 34%, rgba(255,255,255,0.6) 66%, rgba(0,0,0,0.6) 67%)" },
+    { city: "Castries", country: "Saint Lucia", flag: "linear-gradient(180deg, rgba(0,191,255,0.6) 33%, rgba(255,255,255,0.6) 34%, rgba(255,255,255,0.6) 66%, rgba(0,191,255,0.6) 67%)" },
+    { city: "Kingstown", country: "Saint Vincent e Grenadine", flag: "linear-gradient(180deg, rgba(255,223,0,0.6) 33%, rgba(0,104,71,0.6) 34%, rgba(0,104,71,0.6) 66%, rgba(0,56,168,0.6) 67%)" },
+    { city: "Basseterre", country: "Saint Kitts e Nevis", flag: "linear-gradient(180deg, rgba(206,17,38,0.6) 33%, rgba(255,255,255,0.6) 34%, rgba(255,255,255,0.6) 66%, rgba(0,0,0,0.6) 67%)" },
+    { city: "Roseau", country: "Dominica", flag: "linear-gradient(180deg, rgba(0,104,71,0.6) 33%, rgba(255,255,255,0.6) 34%, rgba(255,255,255,0.6) 66%, rgba(0,104,71,0.6) 67%)" },
+    { city: "San Juan", country: "Porto Rico", flag: "linear-gradient(180deg, rgba(206,17,38,0.6) 33%, rgba(255,255,255,0.6) 34%, rgba(255,255,255,0.6) 66%, rgba(0,56,168,0.6) 67%)" }
 ],
 
 southAmericaCapitals: [

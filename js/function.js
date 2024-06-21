@@ -32,7 +32,7 @@ function removeCityF(arrayList, cityNameArray){
 async function openCity (cityCardEl, city){
     //const existingSecondaryCardContainer = cityCardEl.querySelector('.secondary-card-container');
     const secondaryCardContainer = CE('div');
-    secondaryCardContainer.classList.add('secon-c-container', 'width100', 'shape-br40-p15', 'box-s-inset-dx');
+    secondaryCardContainer.classList.add('second-c-container', 'width100', 'shape-br40-p15', 'box-s-inset-dx');
 
     const cityTime = QS('.city-time');
 
@@ -41,7 +41,7 @@ async function openCity (cityCardEl, city){
         cityCardEl.style.minWidth = '100%';
         cityCardEl.style.maxWidth = '100%';
 
-        const cityData = await getWeather(city);
+        const cityData = await getCityWeather(city);
         //console.log(cityData);
 
     //CREAZIONE DELL'ORA LOCALE IN LIVE
@@ -152,7 +152,7 @@ async function openCity (cityCardEl, city){
         cityTime.style.display = 'block';
         console.log(cityTime.style.display);
         
-        const secondaryCardContainer = QS('.secon-c-container');
+        const secondaryCardContainer = QS('.second-c-container');
         //console.log(Number(Number.parseInt(cityCardEl.style.maxWidth)));
         cityCardEl.style.minWidth = '250px';
         cityCardEl.style.maxWidth = '20%';
@@ -179,19 +179,58 @@ function modalFavouritesGen(name, star, txt){
     }, 2000)
 };
 
-export async function getCity (city) {
-    const CITY_URL = `http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=25&appid=${API_KEY}`;
-    const res = await fetch(CITY_URL);
-    const data = await res.json();
-    console.log(data);
+export async function getCityLatLon (city) {
+    try {
+        const CITY_URL = `http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=${API_KEY}`;
+        const res = await fetch(CITY_URL);
+        const data = await res.json();
+        console.log('getCityLatLon:', data);
 
-    return data
+        if (data.length === 0){ throw 'Città non trovata'}
+
+        return data //Torna un array di max 5 obj
+    } catch {
+        const sectionCityList = QS('.city-list');
+        const titleError = CE('h2');
+        titleError.classList.add('card', 'box-shadow', 'txt-center');
+
+        titleError.textContent = 'Città non trovata ☹️';
+        sectionCityList.append(titleError);
+    }
 }
 
-console.log(await getCity(cityName))
+//console.log(await getCityLatLon(cityName))
 
-export async function getWeather (city){
-    const resCity = await getCity(city);
+/* export async function getCityWeatherList (cityName){
+    const resCity = await getCityLatLon(cityName);
+    console.log('getCityWeatherList - resCity:', resCity);
+    console.log('getCityWeatherList - resCity[0]:', resCity[0]);
+
+    const arrayCityName = [];
+    resCity.forEach(async (cityObjLatLon) => {
+        console.log('cityObjLatLon:', cityObjLatLon);
+        
+        const cityLon = cityObjLatLon.lon;
+        const cityLat = cityObjLatLon.lat;
+        //console.log('cityLon', cityLon);
+
+        const WEATHER_URL = `https://api.openweathermap.org/data/2.5/weather?lat=${cityLat}&lon=${cityLon}&appid=${API_KEY}&units=metric`;
+        const res = await fetch(WEATHER_URL);
+        const dataComplete = await res.json();
+        console.log('dataComplete:', dataComplete);
+
+        arrayCityName.push(dataComplete)
+        console.log('arrayCityName', arrayCityName);
+        console.log('arrayCityName[0]', arrayCityName[0]);
+                
+        return arrayCityName
+    });
+
+
+}; */
+
+export async function getCityWeather (city){
+    const resCity = await getCityLatLon(city);
     const cityLat = resCity[0].lat;
     const cityLon = resCity[0].lon;
     
@@ -201,13 +240,13 @@ export async function getWeather (city){
     const WEATHER_URL = `https://api.openweathermap.org/data/2.5/weather?lat=${cityLat}&lon=${cityLon}&appid=${API_KEY}&units=metric`;
     const res = await fetch(WEATHER_URL);
     const data = await res.json();
-    console.log(data);
-    console.log(resCity);
+    console.log('getCityWeather.json:', data);
+    //console.log(resCity);
     //console.log(data.main.temp);
     return data
 }
 
-export async function renderCard (city, obj){ //obj = getWeather(city)
+export async function renderCard (city, obj){ //obj = getCityWeather(city)
 //DEFINISCO GLI ELEMENTI DELLA CARD
     const cityCardEl = CE('div');
     const mainCardContainer = CE('div');
@@ -236,7 +275,7 @@ export async function renderCard (city, obj){ //obj = getWeather(city)
     name.classList.add('name', 'shape-br40-p15');
     country.classList.add('name', 'shape-br40-p15');
     weatherContainer.classList.add('weather', 'flex-row', 'shape-br40-p15')
-    weatherIcon.classList.add('weather__icon');
+    weatherIcon.classList.add('weather__icon', 'width60');
     weatherType.classList.add('weather__type');
     
     tempContainer.classList.add('main-temp', 'flex-row', 'shape-br40-p15', 'padding-side35');
@@ -251,11 +290,16 @@ export async function renderCard (city, obj){ //obj = getWeather(city)
     starFavourite.classList.add('star-favourite', 'cursor-p', 'opacity07');
 
 //ASSEGNO I CONTENUTI
-    const cityData = await getWeather(city);
-    console.log(await obj)
-    console.log(Boolean(obj))
+    const  cityLatLon = await getCityLatLon(city);
+    const  cityDataForName = cityLatLon[0];
+    const cityData = await getCityWeather(city);
+    //console.log('obj passato a renderCard:', await obj)
+    //console.log('Boolean di obj passato a renderCard:', Boolean(obj))
+    console.log('cityData', cityData);
 
-    name.textContent = (obj) ? (obj.city) : (cityData.name);
+    if (obj || cityDataForName.local_names){
+        name.textContent = (obj) ? (obj.city) : (cityDataForName.local_names.it || cityDataForName.name);
+    } else {name.textContent = cityDataForName.name}
     country.textContent = (obj) ? obj.country : cityData.sys.country;
     weatherIcon.src = `https://openweathermap.org/img/wn/${cityData.weather.at(0).icon}@2x.png`
     weatherType.textContent = cityData.weather.at(0).description;
@@ -263,7 +307,7 @@ export async function renderCard (city, obj){ //obj = getWeather(city)
 //VARIABILI PER PRENDERE UN VALORE DALL'API
     const tempValue = Number.parseInt(cityData.main.temp);
     const timeZone = cityData.timezone;
-    console.log(timeZone)
+    //console.log('Time zone di city:', timeZone)
 
 //CONTENUTI DERIVANTI DAI DATI
     degImg.src = '../img/icons8-temperatura-50(1).png';
@@ -384,14 +428,23 @@ export async function renderCard (city, obj){ //obj = getWeather(city)
 export async function renderListCity (dataList){
     const sectionCityList = QS('.city-list');
     sectionCityList.innerHTML = '';
+    console.log('type of dataList', typeof dataList);
+    console.log('Ingresso 1 a renderListCity', dataList);
+    console.log('dataList[0] di renderListCity', dataList[0]);
 
-    const cityCard = dataList.forEach((cityC) => {
-        renderCard(cityC.city, cityC);
+    //const cityCard =     
+    dataList.forEach((cityC) => {
+        console.log('cityC', cityC);
+        renderCard(((cityC.city) || (cityC.name)), cityC);
     })
 
-    /* const body = QS('body');
+    console.log('Parametro dataList di renderListCity', dataList);
 
-    body.append(await cityCard) */
-
-    return cityCard
+    const filtername = QS('#filter-name');
+    filtername.addEventListener('click', () => {
+        console.log('Filter');
+        const dataSortname = dataList.sort((a, b) => a.city.localeCompare(b.city));
+        console.log('Sort:', dataSortname);
+        renderListCity(dataSortname);
+    })
 }

@@ -26,8 +26,17 @@
             <div id="ham-menu__bottom"></div>
         </div>
         <h1>It's <span id="me">me</span>teo</h1>
+
+        <!-- <div class="container-time width10vw bord1try">
+        </div> -->
         <span class="time-now time-style"></span>
-        <input class="shape-br5-p5" type="text" placeholder="Cerca la città">
+        
+        <div class="search-container flex-row">
+            <input id="input-search" class="shape-br5-p5" type="text" placeholder="Cerca la città">
+            <button id="search-button" class="shape-br5-p5 black-transparent25 box-shadow4 hover-scale opacity07">
+                <img class="width30" src="img/icons8-luogo-64.png" alt="">
+            </button>
+        </div>
     </header>
 
     <div class="container">
@@ -50,6 +59,8 @@
                     <li id="oceaniaCapitals" class="cursor-p hover-scale">Capitali oceaniche</li>
                 </ul>
             </ul>
+
+            <button id="filter-name" title="Filtra per temperatura">Filtra</button>
         </nav>
 
         <section class="city-list"></section>
