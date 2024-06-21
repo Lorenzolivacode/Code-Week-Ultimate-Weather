@@ -1,0 +1,32 @@
+@media only screen and (max-width: 1080px) {
+    #side-bar{
+        width: 50%;
+        z-index: 1;
+    }
+
+    .city-list {
+        padding-left: 50px;
+        padding-right: 50px;
+    }
+
+    .card {
+        position: relative;
+    }
+
+    .second-c-container{
+        position: static;
+        max-height: none;
+    }
+
+    .flex-row-around {
+        align-items: end;
+    }
+
+    .city-time-local {
+        border-radius: 20px;
+        padding: 10px;
+        top: 40px;
+        left: 40px;
+        background-color: rgba(247, 242, 235, 0.9);
+    }
+}

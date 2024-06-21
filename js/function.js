@@ -441,10 +441,23 @@ export async function renderListCity (dataList){
     console.log('Parametro dataList di renderListCity', dataList);
 
     const filtername = QS('#filter-name');
+    
     filtername.addEventListener('click', () => {
-        console.log('Filter');
-        const dataSortname = dataList.sort((a, b) => a.city.localeCompare(b.city));
-        console.log('Sort:', dataSortname);
-        renderListCity(dataSortname);
+        /* console.log('Filter');
+        const dataSortName = dataList.sort((a, b) => a.city.localeCompare(b.city));
+        console.log('Sort:', dataSortName);
+        //renderListCity(dataSortName);
+        sectionCityList.innerHTML = ''; */
+
+        /* dataSortName.forEach((e) => {
+            renderCard(e.city, e)
+        }) */
+
+        /* for (let i = 0; i < dataSortName.length; i++) {
+            console.log('Città:', dataSortName[i].city);
+            console.log('Obj:', dataSortName[i]);
+            
+            renderCard(dataSortName[i].city, dataSortName[i])
+        } */
     })
 }
