@@ -3,8 +3,10 @@ header{
     top: 0;
     display: flex;
     flex-wrap: wrap;
+    gap: 30px;
     justify-content: space-between;
     align-items: center;
+    align-content: space-around;
     padding: 40px 80px 40px 40px;
     width: 100%;
     background-color: rgba(247, 242, 235, 0.9);
@@ -48,6 +50,7 @@ header > h1 {
     padding: 20px;
     background-color: rgba(247, 242, 235, 0.9);
     display: none;
+    z-index: 1;
 }
 
 li {

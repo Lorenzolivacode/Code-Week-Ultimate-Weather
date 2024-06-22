@@ -15,6 +15,9 @@ export function CE (ele){
 
 const cityName = 'Palermo';
 const sectionCityList = QS('.city-list');
+//console.log('array', Array.isArray(cityList));
+/* const capitalsListComplete = cityList.flat(1);
+console.log(capitalsListComplete); */
 
 //const CITY_URL = `http://api.openweathermap.org/geo/1.0/direct?q=${cityName}&appid=${API_KEY}`;
 
@@ -34,18 +37,19 @@ async function openCity (cityCardEl, city){
     const secondaryCardContainer = CE('div');
     secondaryCardContainer.classList.add('second-c-container', 'width100', 'shape-br40-p15', 'box-s-inset-dx');
 
+    const cityMainEl = cityCardEl.querySelector('.card__main-container');
     const cityTime = QS('.city-time');
 
-    if (Number.parseInt(cityCardEl.style.maxWidth) < 100 || cityCardEl.style.maxWidth === ''){
-        //console.log(Number(Number.parseInt(cityCardEl.style.maxWidth)));
-        cityCardEl.style.minWidth = '100%';
-        cityCardEl.style.maxWidth = '100%';
+    if (!cityCardEl.classList.contains('min-max-100pe')){
+        console.log('enter');
+        cityCardEl.classList.add('min-max-100pe');
+
+        cityMainEl.classList.add('width40pe-card');
 
         const cityData = await getCityWeather(city);
         //console.log(cityData);
 
     //CREAZIONE DELL'ORA LOCALE IN LIVE
-        //const cityTimeContainer = CE('div');
         const cityTimeLocal = CE('span');
         cityTimeLocal.classList.add('city-time-local', 'time-style');
 
@@ -65,7 +69,7 @@ async function openCity (cityCardEl, city){
 
     //CLOUDS
         const cloudsContainer = CE('div');
-        cloudsContainer.classList.add('clouds-container', 'flex-row');
+        cloudsContainer.classList.add('clouds-container', 'flex-row-cont');
         const cloudsIcon = CE('img');
         cloudsIcon.src = './../img/icons8-nuovoloso-30.png';
         const cloudPercentage = CE('span');
@@ -75,7 +79,7 @@ async function openCity (cityCardEl, city){
 
     //TEMP MAX-MIN
         const tempMaxMinContainer = CE('div');
-        tempMaxMinContainer.classList.add('temp-mm-container', 'flex-row');
+        tempMaxMinContainer.classList.add('temp-mm-container', 'flex-row-cont');
         const tempMaxMinIcon = CE('img');
         tempMaxMinIcon.src = './../img/icons8-temperatura-50(1).png';
         const dataTempCont = CE('div');
@@ -90,7 +94,7 @@ async function openCity (cityCardEl, city){
 
     //RAIN
         const rainContainer = CE('div');
-        rainContainer.classList.add('rain-container', 'flex-row');
+        rainContainer.classList.add('rain-container', 'flex-row-cont');
         const rainIcon = CE('img');
         rainIcon.src = './../img/icons8-rain-24.png';
         const rainQuantity = CE('span');
@@ -105,7 +109,7 @@ async function openCity (cityCardEl, city){
 
     //SNOW
         const snowContainer = CE('div');
-        snowContainer.classList.add('snow-container', 'flex-row');
+        snowContainer.classList.add('snow-container', 'flex-row-cont');
         const snowIcon = CE('img');
         snowIcon.src = './../img/icons8-neve-50.png';
         const snowQuantity = CE('span');
@@ -120,7 +124,7 @@ async function openCity (cityCardEl, city){
 
     //WIND
         const windContainer = CE('div');
-        windContainer.classList.add('wind-container', 'flex-row');
+        windContainer.classList.add('wind-container', 'flex-row-cont');
         const windIcon = CE('img');
         windIcon.src = './../img/icons8-vento-50.png';
         const windConverseCont = CE('div');
@@ -154,8 +158,11 @@ async function openCity (cityCardEl, city){
         
         const secondaryCardContainer = QS('.second-c-container');
         //console.log(Number(Number.parseInt(cityCardEl.style.maxWidth)));
-        cityCardEl.style.minWidth = '250px';
-        cityCardEl.style.maxWidth = '20%';
+        /* cityCardEl.style.minWidth = '250px';
+        cityCardEl.style.maxWidth = '20%'; */
+
+        cityCardEl.classList.remove('min-max-100pe');
+        cityMainEl.classList.remove('width40pe-card');
 
         secondaryCardContainer.remove();
         //cityCardEl.classList.remove('flex-row-around');
@@ -269,8 +276,8 @@ export async function renderCard (city, obj){ //obj = getCityWeather(city)
     const starFavourite = CE('img');
 
 //ATTRIBUISCO LE CLASS
-    cityCardEl.classList.add('card', 'box-shadow', 'flex-row-around');
-    mainCardContainer.classList.add('card__main-container', 'card', 'hover-scale', 'flex-column')
+    cityCardEl.classList.add('card', 'box-shadow', 'flex-card-around');
+    mainCardContainer.classList.add('card__main-container', 'br20', 'hover-scale', 'flex-column')
     countryFlag.classList.add('country-flag');
     name.classList.add('name', 'shape-br40-p15');
     country.classList.add('name', 'shape-br40-p15');

@@ -2,6 +2,10 @@
     border: 1px solid black;
 }
 
+.br20 {
+    border-radius: 20px;
+}
+
 .flex-row {
     display: flex;
     align-items: center;
@@ -11,7 +15,20 @@
     /* width: 100%; */
 }
 
+.flex-row-cont {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
 .flex-row-around {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.flex-card-around {
     display: flex;
     align-items: center;
     justify-content: space-around;
@@ -104,6 +121,10 @@
     width: 30px;
 }
 
+.width50{
+    width: 50px;
+}
+
 .width60{
     width: 60px;
 }
@@ -111,6 +132,15 @@
 .width100 {
     width: 100%;
     height: 100%;
+}
+
+.width40pe-card{
+    width: 40%;
+}
+
+.min-max-100pe {
+    min-width: 100%;
+    max-width: 100%;
 }
 
 .weather__type {

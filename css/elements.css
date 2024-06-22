@@ -43,10 +43,10 @@ body {
     margin: 20px;
     min-width: 250px;
     max-width: 20%;
-    border-radius: 20px;
     padding: 10px;
     /* padding: 20px; */
     /* padding-top: 0; */
+    border-radius: 20px;
     background-color: rgba(247, 242, 235, 0.9);
 }
 

@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="it">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="img/icons8-sole-30.png">
     <title>It's Meteo</title>
 </head>
 <body>
@@ -25,7 +26,11 @@
             <div id="ham-menu__center"></div>
             <div id="ham-menu__bottom"></div>
         </div>
-        <h1>It's <span id="me">me</span>teo</h1>
+
+        <div class="flex-row">
+            <img class="width50" src="img/icons8-sole-30.png" alt="Icona sole">
+            <h1>It's <span id="me">me</span>teo</h1>
+        </div>
 
         <!-- <div class="container-time width10vw bord1try">
         </div> -->
@@ -39,7 +44,7 @@
         </div>
     </header>
 
-    <div class="container">
+    <main class="container-main">
         <nav id="side-bar" class="box-shadow">
             <ul>
                 <li id="favourites-li" class="side-bar__title cursor-p hover-scale">
@@ -64,7 +69,7 @@
         </nav>
 
         <section class="city-list"></section>
-    </div>
+    </main>
 
     <script src="script.js" type="module"></script>
 </body>
