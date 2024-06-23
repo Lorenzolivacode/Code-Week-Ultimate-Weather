@@ -19,14 +19,6 @@ body {
     font-size: 100%;
 } */
 
-#continents-capitals{
-    margin-left: 25%;
-}
-
-#continents-capitals > li {
-    margin: 20px;
-}
-
 .city-list {
     display: flex;
     justify-content: center;
@@ -116,10 +108,31 @@ body {
 }
 
 .modal-new-f {
-    position: absolute;
+    position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     padding: 40px;
     font-weight: bolder;
+}
+
+.modal-load {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 120px;
+    border-radius: 50%;
+}
+
+.load-img {
+    animation: animation-1 2s infinite ease-in-out;
+}
+
+@keyframes animation-1 {
+    from {
+        transform: scale(1.5) rotate(0);
+    }
+    to {
+        transform: scale(1.9) rotate(360deg);
+    }
 }

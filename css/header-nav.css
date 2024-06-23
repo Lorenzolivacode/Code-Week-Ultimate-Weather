@@ -48,13 +48,27 @@ header > h1 {
     width: 25%;
     height: 100vh;
     padding: 20px;
+    padding-bottom: 325px;
     background-color: rgba(247, 242, 235, 0.9);
     display: none;
     z-index: 1;
+    overflow: auto;
 }
 
 li {
     list-style-type: none;
+}
+
+ul > ul{
+    margin-left: 25%;
+}
+
+ul > ul > li {
+    margin: 20px;
+}
+
+#select-weather{
+    display: none;
 }
 
 /* #favourites-li {
@@ -65,12 +79,21 @@ li {
     display: flex;
     align-items: center;
     gap: 10px;
-    border-bottom: 1px solid var(--color-darkgray);
     padding: 15px;
 }
 
+.side-bar__title > button {
+    border: none;
+    background-color: transparent;
+}
+
+.side-bar__title > button > img,
 .side-bar__title > img {
-    width: 20px;
+    width: 25px;
+}
+
+.section-btn {
+    border-top: 1px solid var(--color-darkgray);
 }
 
 #search-button {

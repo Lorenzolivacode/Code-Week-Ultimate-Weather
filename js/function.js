@@ -1,7 +1,5 @@
 import { API_KEY } from "./keys.js";
 import { cityList } from "./data-capitals2.js";
-//import { favourites } from "./data-capitals.js";
-
 
 export function QS (tag){
     const QS = document.querySelector(tag);
@@ -13,27 +11,35 @@ export function CE (ele){
     return CE;
 };
 
-const cityName = 'Palermo';
 const sectionCityList = QS('.city-list');
-//console.log('array', Array.isArray(cityList));
-/* const capitalsListComplete = cityList.flat(1);
-console.log(capitalsListComplete); */
-
-//const CITY_URL = `http://api.openweathermap.org/geo/1.0/direct?q=${cityName}&appid=${API_KEY}`;
 
 function removeCityF(arrayList, cityNameArray){
     const index = arrayList.findIndex((element) => element.city === cityNameArray);
 
     if (index !== 1){
-        console.log(index)
-        console.log(arrayList)
+        //console.log(index)
+        //console.log(arrayList)
 
         arrayList.splice(index,1);
     }
 };
 
+//FUNZIONE PER APRIRE UNA MODALE DI LOADING
+export function modalLoadGen(){
+    const containerLoad = CE('div');
+    const loadingImg = CE('img');
+    containerLoad.classList.add('modal-load', 'modal-new-f', 'card', 'box-shadow-transapernt');
+    loadingImg.src = 'img/icons8-frame-spinner--5-96.png';
+    loadingImg.classList.add('load-img');
+
+    containerLoad.append(loadingImg);
+    sectionCityList.append(containerLoad);
+
+    return containerLoad
+}
+
+//FUNZIONE PER "APRIRE" LA CARD E MOSTRARE PIù INFO
 async function openCity (cityCardEl, city){
-    //const existingSecondaryCardContainer = cityCardEl.querySelector('.secondary-card-container');
     const secondaryCardContainer = CE('div');
     secondaryCardContainer.classList.add('second-c-container', 'width100', 'shape-br40-p15', 'box-s-inset-dx');
 
@@ -41,13 +47,13 @@ async function openCity (cityCardEl, city){
     const cityTime = QS('.city-time');
 
     if (!cityCardEl.classList.contains('min-max-100pe')){
-        console.log('enter');
+        //console.log('enter');
         cityCardEl.classList.add('min-max-100pe');
 
         cityMainEl.classList.add('width40pe-card');
 
         const cityData = await getCityWeather(city);
-        //console.log(cityData);
+        ////console.log(cityData);
 
     //CREAZIONE DELL'ORA LOCALE IN LIVE
         const cityTimeLocal = CE('span');
@@ -74,7 +80,7 @@ async function openCity (cityCardEl, city){
         cloudsIcon.src = './../img/icons8-nuovoloso-30.png';
         const cloudPercentage = CE('span');
         cloudPercentage.textContent = `Nuvolosità: ${cityData.clouds.all}%`;
-        //console.log(cloudPercentage.textContent);
+        ////console.log(cloudPercentage.textContent);
         cloudsContainer.append(cloudPercentage, cloudsIcon);
 
     //TEMP MAX-MIN
@@ -139,9 +145,6 @@ async function openCity (cityCardEl, city){
         windConverseCont.append(windMS, windKH, windN);
         windContainer.append(windConverseCont, windIcon);
 
-        //cityCardEl.classList.add('flex-row-around');
-
-
         secondaryCardContainer.append(
             cityTimeLocal,
             cloudsContainer,
@@ -154,12 +157,9 @@ async function openCity (cityCardEl, city){
         cityCardEl.append(secondaryCardContainer);
     } else {
         cityTime.style.display = 'block';
-        console.log(cityTime.style.display);
+        //console.log(cityTime.style.display);
         
         const secondaryCardContainer = QS('.second-c-container');
-        //console.log(Number(Number.parseInt(cityCardEl.style.maxWidth)));
-        /* cityCardEl.style.minWidth = '250px';
-        cityCardEl.style.maxWidth = '20%'; */
 
         cityCardEl.classList.remove('min-max-100pe');
         cityMainEl.classList.remove('width40pe-card');
@@ -169,6 +169,7 @@ async function openCity (cityCardEl, city){
     }
 };
 
+//FUNZIONE PER MOSTRARE LA MODALE PER AGGIUNZIONE E RIMOZIONE DAI PREFERITI
 function modalFavouritesGen(name, star, txt){
     const modalNewF = CE('div');
     const titleNewF = CE('p');
@@ -186,16 +187,19 @@ function modalFavouritesGen(name, star, txt){
     }, 2000)
 };
 
+//FUNZIONE CHE, DATO UN NOME DI CITTà, TORNA UN OBJ CON LAT E LON
 export async function getCityLatLon (city) {
     try {
         const CITY_URL = `http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=${API_KEY}`;
         const res = await fetch(CITY_URL);
         const data = await res.json();
-        console.log('getCityLatLon:', data);
+        //console.log('getCityLatLon:', data);
 
         if (data.length === 0){ throw 'Città non trovata'}
 
-        return data //Torna un array di max 5 obj
+        return data 
+        // &limit=1 => Torna un array di 1 obj
+        // &limit= => Torna un array di max 5 obj
     } catch {
         const sectionCityList = QS('.city-list');
         const titleError = CE('h2');
@@ -206,29 +210,28 @@ export async function getCityLatLon (city) {
     }
 }
 
-//console.log(await getCityLatLon(cityName))
-
+//FUNZIONE PER TENTATIVO DI RENDERIZZARE UNA LISTA DI PIù CARD DI CITTà CON STESSO NOME DA INPUT
 /* export async function getCityWeatherList (cityName){
     const resCity = await getCityLatLon(cityName);
-    console.log('getCityWeatherList - resCity:', resCity);
-    console.log('getCityWeatherList - resCity[0]:', resCity[0]);
+    //console.log('getCityWeatherList - resCity:', resCity);
+    //console.log('getCityWeatherList - resCity[0]:', resCity[0]);
 
     const arrayCityName = [];
     resCity.forEach(async (cityObjLatLon) => {
-        console.log('cityObjLatLon:', cityObjLatLon);
+        //console.log('cityObjLatLon:', cityObjLatLon);
         
         const cityLon = cityObjLatLon.lon;
         const cityLat = cityObjLatLon.lat;
-        //console.log('cityLon', cityLon);
+        ////console.log('cityLon', cityLon);
 
         const WEATHER_URL = `https://api.openweathermap.org/data/2.5/weather?lat=${cityLat}&lon=${cityLon}&appid=${API_KEY}&units=metric`;
         const res = await fetch(WEATHER_URL);
         const dataComplete = await res.json();
-        console.log('dataComplete:', dataComplete);
+        //console.log('dataComplete:', dataComplete);
 
         arrayCityName.push(dataComplete)
-        console.log('arrayCityName', arrayCityName);
-        console.log('arrayCityName[0]', arrayCityName[0]);
+        //console.log('arrayCityName', arrayCityName);
+        //console.log('arrayCityName[0]', arrayCityName[0]);
                 
         return arrayCityName
     });
@@ -236,24 +239,28 @@ export async function getCityLatLon (city) {
 
 }; */
 
+//FUNZIONE CHE, DATO UN NOME DI CITTà, TORNA UN OBJ CON TUTTE LE INFO
 export async function getCityWeather (city){
     const resCity = await getCityLatLon(city);
+    //console.log('resCity', resCity);
     const cityLat = resCity[0].lat;
     const cityLon = resCity[0].lon;
     
-    //console.log(cityLat)
-    //console.log(cityLon)
+    ////console.log(cityLat)
+    ////console.log(cityLon)
     
     const WEATHER_URL = `https://api.openweathermap.org/data/2.5/weather?lat=${cityLat}&lon=${cityLon}&appid=${API_KEY}&units=metric`;
     const res = await fetch(WEATHER_URL);
     const data = await res.json();
-    console.log('getCityWeather.json:', data);
-    //console.log(resCity);
-    //console.log(data.main.temp);
+    //console.log('getCityWeather.json:', data);
+    ////console.log(resCity);
+    ////console.log(data.main.temp);
     return data
 }
 
-export async function renderCard (city, obj){ //obj = getCityWeather(city)
+//FUNZIONE CHE, DATO UN NOME DI CITTà ED UN OBJ DI RIFERIMENTO, RENDERIZZA LA SINGOLA CARD
+    //IN CASO DI OBJ NON PRESENTE, PROVA A PRENDERE RIFERIMENTO DA "data-capitals2"
+export async function renderCard (city, obj){ 
 //DEFINISCO GLI ELEMENTI DELLA CARD
     const cityCardEl = CE('div');
     const mainCardContainer = CE('div');
@@ -300,9 +307,9 @@ export async function renderCard (city, obj){ //obj = getCityWeather(city)
     const  cityLatLon = await getCityLatLon(city);
     const  cityDataForName = cityLatLon[0];
     const cityData = await getCityWeather(city);
-    //console.log('obj passato a renderCard:', await obj)
-    //console.log('Boolean di obj passato a renderCard:', Boolean(obj))
-    console.log('cityData', cityData);
+    ////console.log('obj passato a renderCard:', await obj)
+    ////console.log('Boolean di obj passato a renderCard:', Boolean(obj))
+    //console.log('cityData', cityData);
 
     if (obj || cityDataForName.local_names){
         name.textContent = (obj) ? (obj.city) : (cityDataForName.local_names.it || cityDataForName.name);
@@ -314,7 +321,7 @@ export async function renderCard (city, obj){ //obj = getCityWeather(city)
 //VARIABILI PER PRENDERE UN VALORE DALL'API
     const tempValue = Number.parseInt(cityData.main.temp);
     const timeZone = cityData.timezone;
-    //console.log('Time zone di city:', timeZone)
+    ////console.log('Time zone di city:', timeZone)
 
 //CONTENUTI DERIVANTI DAI DATI
     degImg.src = '../img/icons8-temperatura-50(1).png';
@@ -334,7 +341,7 @@ export async function renderCard (city, obj){ //obj = getCityWeather(city)
         }
     }, 1000);
 
-    //console.log(obj)
+    ////console.log(obj)
 
 //CONTROLLO SE FA PARTE DEI PREFERITI PER ASSEGNARE LA STELLA
     if ((obj) && obj.favourites === `yes`){
@@ -342,8 +349,6 @@ export async function renderCard (city, obj){ //obj = getCityWeather(city)
     } else {
         starFavourite.src = '../img/icons8-stella-30(gray).png';
     }
-
-    //console.log(tempValue)
 
 //ASSEGNO EVENTUALI STILI
     countryFlag.style.background = (obj) ? obj.flag : '';
@@ -376,12 +381,12 @@ export async function renderCard (city, obj){ //obj = getCityWeather(city)
     cityCardEl.append(mainCardContainer);
 
     sectionCityList.append(cityCardEl);
-    //console.log(name.textContent)
+    ////console.log(name.textContent)
 
 //ASSEGNO GLI EVENTI
     starFavourite.onclick = (e) => {
         const favouritesTag = QS('#favourites');
-        console.log(favouritesTag)
+        //console.log(favouritesTag)
 
         if (starFavourite.src.includes('gray')){
             const newFavourite = {
@@ -391,20 +396,20 @@ export async function renderCard (city, obj){ //obj = getCityWeather(city)
                 id: cityData.sys.id,
                 favourites: 'yes'
             }
-            console.log(newFavourite)
+            //console.log(newFavourite)
 
             const starColor = '../img/icons8-stella-30(orange).png';
             const messageTxt = 'è stata aggiunta ai preferiti';
             modalFavouritesGen(name, starColor, messageTxt)
 
             cityList.favourites.push(newFavourite);
-            console.log(cityData)
+            //console.log(cityData)
 
             favouritesTag.textContent = `Preferiti (${cityList.favourites.length})`;
 
             starFavourite.src = '../img/icons8-stella-30(orange).png';
         } else {
-            console.log('F!')
+            //console.log('F!')
             starFavourite.src = '../img/icons8-stella-30(gray).png';
             
             const starColor = '../img/icons8-stella-30(gray).png';
@@ -420,11 +425,11 @@ export async function renderCard (city, obj){ //obj = getCityWeather(city)
 
     mainCardContainer.addEventListener('click', (e) => {
         const targetCalss = e.target.classList;
-        console.log(targetCalss)
-        console.log(!targetCalss.contains('star-favourite'))
+        //console.log(targetCalss)
+        //console.log(!targetCalss.contains('star-favourite'))
 
         if (!targetCalss.contains('star-favourite')){
-            console.log('pippo');
+            //console.log('pippo');
             openCity(cityCardEl, city);
         }
     });
@@ -432,39 +437,44 @@ export async function renderCard (city, obj){ //obj = getCityWeather(city)
     return cityCardEl
 }
 
+//FUNZIONE CHE, DATO UN ARRAY DI OBJ CON I NOMI DELLE CITTà, RENDERIZZA TUTTA LA LISTA
 export async function renderListCity (dataList){
     const sectionCityList = QS('.city-list');
     sectionCityList.innerHTML = '';
-    console.log('type of dataList', typeof dataList);
-    console.log('Ingresso 1 a renderListCity', dataList);
-    console.log('dataList[0] di renderListCity', dataList[0]);
+    //console.log('type of dataList', typeof dataList);
+    //console.log('Ingresso 1 a renderListCity', dataList);
+    //console.log('dataList[0] di renderListCity', dataList[0]);
 
     //const cityCard =     
     dataList.forEach((cityC) => {
-        console.log('cityC', cityC);
+        //console.log('cityC', cityC);
         renderCard(((cityC.city) || (cityC.name)), cityC);
     })
 
-    console.log('Parametro dataList di renderListCity', dataList);
+    //console.log('Parametro dataList di renderListCity', dataList);
 
     const filtername = QS('#filter-name');
     
-    filtername.addEventListener('click', () => {
-        /* console.log('Filter');
+//Prova per rendere in ordine alfabetico
+    /* filtername.addEventListener('click', () => {
+        sectionCityList.innerHTML = '';
+        //console.log('Filter');
         const dataSortName = dataList.sort((a, b) => a.city.localeCompare(b.city));
-        console.log('Sort:', dataSortName);
+        //console.log('Sort:', dataSortName);
+        //console.log('Sort 0:', dataSortName[0]);
         //renderListCity(dataSortName);
-        sectionCityList.innerHTML = ''; */
 
-        /* dataSortName.forEach((e) => {
+        dataSortName.forEach((e) => {
             renderCard(e.city, e)
-        }) */
+        })
 
-        /* for (let i = 0; i < dataSortName.length; i++) {
-            console.log('Città:', dataSortName[i].city);
-            console.log('Obj:', dataSortName[i]);
+        for (let i = 0; i < dataSortName.length; i++) {
+            //console.log('Città:', dataSortName[i].city);
+            //console.log('Obj:', dataSortName[i]);
             
-            renderCard(dataSortName[i].city, dataSortName[i])
-        } */
-    })
+            setTimeout(() => {
+                renderCard(dataSortName[i].city, dataSortName[i])
+            },2000)
+        }
+    }) */
 }

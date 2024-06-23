@@ -61,8 +61,16 @@
     padding-right: 35px;
 }
 
+.b-bottom{
+    border-bottom: 1px solid var(--color-darkgray);
+}
+
 .box-shadow {
     box-shadow: 0 0 10px black;
+}
+
+.box-shadow-transapernt {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.03);
 }
 
 .box-shadow4 {

@@ -9,17 +9,6 @@
     <title>It's Meteo</title>
 </head>
 <body>
-    <!-- <div class="card">
-        <h2 class="name shape-br40-p15"></h2>
-        <div class="weather flex-row shape-br40-p15">
-            <img class="weather__icon" src="" alt="Weather icon">
-            <span class="weather__type"></span>
-        </div>
-        <div class="main-temp flex-row shape-br40-p15 weather-hot">
-            <span class="main-temp__temp"></span>
-            <span class="main-temp__humidity"></span>
-        </div>
-    </div> -->
     <header class="box-shadow">
         <div class="ham-menu shape-br5-p5 box-shadow cursor-p hover-scale">
             <div id="ham-menu__top"></div>
@@ -32,8 +21,6 @@
             <h1>It's <span id="me">me</span>teo</h1>
         </div>
 
-        <!-- <div class="container-time width10vw bord1try">
-        </div> -->
         <span class="time-now time-style"></span>
         
         <div class="search-container flex-row">
@@ -47,15 +34,15 @@
     <main class="container-main">
         <nav id="side-bar" class="box-shadow">
             <ul>
-                <li id="favourites-li" class="side-bar__title cursor-p hover-scale">
+                <li id="favourites-li" class="side-bar__title b-bottom cursor-p hover-scale">
                     <img src="img/icons8-stella-30(gray).png" alt="Icona preferiti">
                     <span id="favourites">Preferiti</span>
                 </li>
-                <li class="side-bar__title">
+                <li class="side-bar__title b-bottom">
                     <img src="img/icons8-mappamondo-50.png" alt="Icona capitali nel mondo">
                     <span>Capitali</span>
                 </li>
-                <ul id="continents-capitals">
+                <ul id="continents-capitals" class="b-bottom">
                     <li id="europeanCapitals" class="cursor-p hover-scale">Capitali europee</li>
                     <li id="northAmericaCapitals" class="cursor-p hover-scale">Capitali nord-americane</li>
                     <li id="southAmericaCapitals" class="cursor-p hover-scale">Capitali sud-americane</li>
@@ -63,9 +50,62 @@
                     <li id="africaCapitals" class="cursor-p hover-scale">Capitali africane</li>
                     <li id="oceaniaCapitals" class="cursor-p hover-scale">Capitali oceaniche</li>
                 </ul>
+                <li class="side-bar__title b-bottom">
+                    <span>Filtra per meteo</span>
+                    <button>
+                        <img id="filter-weather" src="img/icons8-freccia-giu-48.png" alt="" srcset="">
+                    </button>
+                </li>
+                <ul id="select-weather" class="b-bottom">
+                    <li>
+                        <input id="01d01n" value="Cielo-limpido" type="radio" name="select">
+                        <label for="01d01n">Cielo limpido</label>
+                    </li>
+
+                    <li>
+                        <input id="02d02n" value="Poco-nuvoloso" type="radio" name="select">
+                        <label for="02d02n">Poco nuvoloso</label>
+                    </li>
+
+                    <li>
+                        <input id="03d03n" value="Nubi-sparse" type="radio" name="select">
+                        <label for="03d03n">Nubi sparse</label>
+                    </li>
+                    
+                    <li>
+                        <input id="04d04n" value="Schiarite" type="radio" name="select">
+                        <label for="04d04n">Schiarite</label>
+                    </li>
+
+                    <li>
+                        <input id="09d09n" value="Pioggia-debole" type="radio" name="select">
+                        <label for="09d09n">Pioggia debole</label>
+                    </li>
+
+                    <li>
+                        <input id="10d10n" value="Pioggia" type="radio" name="select">
+                        <label for="10d10n">Pioggia</label>
+                    </li>
+
+                    <li>
+                        <input id="11d11n" value="Temporale" type="radio" name="select">
+                        <label for="11d11n">Temporale</label>
+                    </li>
+
+                    <li>
+                        <input id="13d13n" value="Neve" type="radio" name="select">
+                        <label for="13d13n">Neve</label>
+                    </li>
+
+                    <li>
+                        <input id="50d50n" value="Misto" type="radio" name="select">
+                        <label for="50d50n">Misto</label>
+                    </li>
+                </ul>
             </ul>
 
-            <button id="filter-name" title="Filtra per temperatura">Filtra</button>
+            <!-- <button id="filter-name" title="Filtra per temperatura">Filtra</button> -->
+            </div>
         </nav>
 
         <section class="city-list"></section>
